@@ -1,6 +1,5 @@
-// import { buildSchema } from 'graphql';
 import { makeExecutableSchema } from 'graphql-tools';
-import resolvers from './resolvers';
+import { resolvers } from './resolvers';
 
 const typeDefs = `
     type Friend {
@@ -13,15 +12,21 @@ const typeDefs = `
         contacts: [Contact]
     }
 
+    type Alien {
+        id: ID,
+        firstName: String
+        lastName: String
+        planet: String
+    }
+
     type Contact {
-        firstName: String,
+        firstName: String
         lastName: String
     }
 
     enum Gender {
         MALE
         FEMALE
-        NONBINARY
         OTHER
     }
 
@@ -49,6 +54,6 @@ const typeDefs = `
     }
 `;
 
-const schema = makeExecutableSchema(typeDefs, resolvers);
+const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 export { schema };
